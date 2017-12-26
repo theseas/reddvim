@@ -5,7 +5,7 @@
 // @homepage https://github.com/theseas/reddvim/raw/master/reddvim.user.js
 // @match https://www.reddit.com/*
 // @grant GM_openInTab
-// @version 0.0.3.21
+// @version 0.0.3.22
 // @run-at document-end
 // ==/UserScript==
 
@@ -107,7 +107,7 @@ class ReddVim{
 		e.preventDefault();
 	}
 
-	listener(e){
+	handler(e){
 		console.log('Key: ' + e.key);
 		if(this.mode === this.modes.normal){
 			this.normal_mode(e);
@@ -121,7 +121,9 @@ function main(){
 	var table = document.getElementById('siteTable');
 	var post = new Post(table.querySelectorAll('[id^="thing_"]'));
 	reddvim = new ReddVim(post);
-	window.addEventListener('keypress', reddvim.listener, true);
+	window.addEventListener('keypress', function(e){
+		reddvim.handler(e);
+	}, true);
 	console.log('main called');
 }
 
