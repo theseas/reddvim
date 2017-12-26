@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name ReddVim
-// @description Enhances reddit user experience by allowing the user to navigate the site using vim-like keyboard sortcuts.
+// @description Enhances reddit user experience by allowing the user to navigate the site using vim-like keyboard shortcuts.
 // @namespace theseas
 // @homepage https://github.com/theseas/reddvim/raw/master/reddvim.user.js
 // @match https://www.reddit.com/*
 // @grant GM_openInTab
-// @version 0.0.3.16
+// @version 0.0.3.17
 // @run-at document-end
 // ==/UserScript==
 
