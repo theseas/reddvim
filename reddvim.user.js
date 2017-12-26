@@ -5,7 +5,7 @@
 // @homepage https://github.com/theseas/reddvim/raw/master/reddvim.user.js
 // @match https://www.reddit.com/*
 // @grant GM_openInTab
-// @version 0.0.3.22
+// @version 0.0.3.23
 // @run-at document-end
 // ==/UserScript==
 
@@ -68,6 +68,16 @@ class Post{
 		var post_url = this.posts[this.get_focus()].querySelector('[data-event-action="comments"]').href;
 		GM_openInTab(post_url);
 	}
+
+	upvote(){
+		var el = this.posts[this.get_focus()].querySelector('[data-event-action="upvote"]');
+		el.click();
+	}
+
+	downvote(){
+		var el = this.posts[this.get_focus()].querySelector('[data-event-action="downvote"]');
+		el.click();
+	}
 }
 
 class ReddVim{
@@ -89,7 +99,7 @@ class ReddVim{
 	}
 
 	insert_mode(e){
-		if(e.key === 'ESC'){
+		if(e.key === 'Escape'){
 			this.switch_mode();
 		}
 	}
@@ -101,8 +111,12 @@ class ReddVim{
 			this.post.move_up();
 		}else if(e.key === 'l'){
 			this.post.open();
-		}else if(e.key === 'i'){
+		}else if(e.key === 'i' || e.key === 'Insert'){
 			this.switch_mode();
+		}else if(e.ctrlKey && e.key === 'a'){
+			this.post.upvote();
+		}else if(e.ctrlKey && e.key === 'x'){
+			this.post.downvote();
 		}
 		e.preventDefault();
 	}
