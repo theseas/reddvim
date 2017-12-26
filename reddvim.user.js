@@ -5,7 +5,7 @@
 // @homepage https://github.com/theseas/reddvim/raw/master/reddvim.user.js
 // @match https://www.reddit.com/*
 // @grant GM_openInTab
-// @version 0.0.3.20
+// @version 0.0.3.21
 // @run-at document-end
 // ==/UserScript==
 
@@ -75,7 +75,7 @@ class ReddVim{
 		this.modes = {
 			normal:0,
 			insert:1
-		}
+		};
 		this.mode = this.modes.normal;
 		this.post = post;
 	}
@@ -108,12 +108,12 @@ class ReddVim{
 	}
 
 	listener(e){
+		console.log('Key: ' + e.key);
 		if(this.mode === this.modes.normal){
 			this.normal_mode(e);
-		}else{
+		}else if(this.mode === this.modes.insert){
 			this.insert_mode(e);
 		}
-		console.log('Key: ' + e.key);
 	}
 }
 
