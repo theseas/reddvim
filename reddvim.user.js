@@ -5,7 +5,7 @@
 // @homepage https://github.com/theseas/reddvim/raw/master/reddvim.user.js
 // @match https://www.reddit.com/*
 // @grant GM_openInTab
-// @version 0.0.3.17
+// @version 0.0.3.18
 // @run-at document-end
 // ==/UserScript==
 
@@ -70,23 +70,58 @@ class Post{
 	}
 }
 
-function listener(e){
-	var key = e.key;
-	if(key === 'j' || key === 'J'){
-		post.move_down();
-	}else if (key === 'k' || key === 'K'){
-		post.move_up();
-	}else if (key === 'l' || key === 'L'){
-		post.open();
+class ReddVim{
+	constructor(post){
+		this.modes = {
+			normal:0,
+			insert:1
+		}
+		this.mode = this.modes.normal;
+		this.post = post;
 	}
-	e.preventDefault()
-}
 
+	switch_mode(){
+		if(this.mode === this.modes.normal){
+			this.mode = this.modes.insert;
+		}else{
+			this.mode = this.modes.normal;
+		}
+	}
+
+	insert_mode(e){
+		if(e.key === 'ESC'){
+			this.switch_mode():
+		}
+	}
+
+	normal_mode(e){
+		if(e.key === 'j'){
+			this.post.move_down();
+		}else if(e.key === 'k'){
+			this.post.move_up();
+		}else if(e.key === 'l'){
+			this.post.open()
+		}else if(e.key === 'i'){
+			this.switch_mode();
+		}
+		e.preventDefault()
+	}
+
+	listener(e){
+		if(this.mode === this.modes.normal){
+			this.normal_mode(e);
+		}else{
+			this.insert_mode(e);
+		}
+		console.log('Key: ' + e.key);
+	}
+}
 
 function main(){
 	var table = document.getElementById('siteTable');
-	post = new Post(table.querySelectorAll('[id^="thing_"]'));
-	window.addEventListener('keypress', listener, true);
+	var post = new Post(table.querySelectorAll('[id^="thing_"]'));
+	reddvim = new ReddVim(post);
+	window.addEventListener('keypress', reddvim.listener, true);
 	console.log('main called');
 }
 
