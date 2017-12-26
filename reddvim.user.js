@@ -5,7 +5,7 @@
 // @homepage https://github.com/theseas/reddvim/raw/master/reddvim.user.js
 // @match https://www.reddit.com/*
 // @grant GM_openInTab
-// @version 0.0.3.19
+// @version 0.0.3.20
 // @run-at document-end
 // ==/UserScript==
 
@@ -90,7 +90,7 @@ class ReddVim{
 
 	insert_mode(e){
 		if(e.key === 'ESC'){
-			this.switch_mode():
+			this.switch_mode();
 		}
 	}
 
