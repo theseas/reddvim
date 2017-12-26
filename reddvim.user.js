@@ -5,7 +5,7 @@
 // @homepage https://github.com/theseas/reddvim/raw/master/reddvim.user.js
 // @match https://www.reddit.com/*
 // @grant GM_openInTab
-// @version 0.0.3.23
+// @version 0.0.3.24
 // @run-at document-end
 // ==/UserScript==
 
@@ -39,7 +39,7 @@ class Post{
 		var el = this.posts[this.get_focus()];
 		el.style.borderLeft = "3px solid #ccc";
 		el.style.backgroundColor = "#def";
-		el.querySelector('[data-event-action="comments"]').focus();
+		el.focus();
 	}
 
 	// removes highlight from the currently focused post
