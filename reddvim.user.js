@@ -5,7 +5,7 @@
 // @homepage https://github.com/theseas/reddvim/raw/master/reddvim.user.js
 // @match https://www.reddit.com/*
 // @grant GM_openInTab
-// @version 0.0.3.18
+// @version 0.0.3.19
 // @run-at document-end
 // ==/UserScript==
 
@@ -100,11 +100,11 @@ class ReddVim{
 		}else if(e.key === 'k'){
 			this.post.move_up();
 		}else if(e.key === 'l'){
-			this.post.open()
+			this.post.open();
 		}else if(e.key === 'i'){
 			this.switch_mode();
 		}
-		e.preventDefault()
+		e.preventDefault();
 	}
 
 	listener(e){
